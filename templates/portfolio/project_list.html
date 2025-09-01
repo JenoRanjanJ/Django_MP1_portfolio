@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Projects{% endblock %}
+{% block content %}
+<h1>Project Gallery</h1>
+
+{% if skills %}
+  <section class="skills">
+    <h2>Skills</h2>
+    <ul class="chip-list">
+      {% for s in skills %}
+        <li class="chip">{{ s.name }} – {{ s.proficiency_level }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+{% endif %}
+
+<section class="grid">
+  {% for p in projects %}
+    <article class="card">
+      <a href="{% url 'project_detail' p.pk %}">
+        {% if p.image %}
+          <img src="{{ p.image.url }}" alt="{{ p.title }}">
+        {% endif %}
+        <div class="card-body">
+          <h3>{{ p.title }}</h3>
+          <p>{{ p.description|truncatechars:120 }}</p>
+        </div>
+      </a>
+      {% if user.is_staff %}
+        <div class="card-actions">
+          <a href="{% url 'project_update' p.pk %}">Edit</a>
+          <a href="{% url 'project_delete' p.pk %}">Delete</a>
+        </div>
+      {% endif %}
+    </article>
+  {% empty %}
+    <p>No projects yet.</p>
+  {% endfor %}
+</section>
+{% endblock %}

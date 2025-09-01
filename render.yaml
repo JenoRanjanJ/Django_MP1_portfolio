@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: django-miniproject1
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn Django-miniproject1.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: Django-miniproject1.settings
+      - key: PYTHON_VERSION
+        value: 3.13.5

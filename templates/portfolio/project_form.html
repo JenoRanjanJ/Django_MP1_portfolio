@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}{% if object %}Edit{% else %}Create{% endif %} Project{% endblock %}
+{% block content %}
+<h1>{% if object %}Edit{% else %}Create{% endif %} Project</h1>
+<form method="post" enctype="multipart/form-data" class="form">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="form-row">
+    <label>Title</label>
+    {{ form.title }}
+    {{ form.title.errors }}
+  </div>
+  <div class="form-row">
+    <label>Description</label>
+    {{ form.description }}
+    {{ form.description.errors }}
+  </div>
+  <div class="form-row">
+    <label>Image</label>
+    {{ form.image }}
+    {{ form.image.errors }}
+  </div>
+  <div class="form-row">
+    <label>Link</label>
+    {{ form.link }}
+    {{ form.link.errors }}
+  </div>
+  <button type="submit" class="btn">Save</button>
+</form>
+{% endblock %}

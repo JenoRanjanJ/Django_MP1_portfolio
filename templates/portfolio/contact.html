@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<h1>Contact</h1>
+<form method="post" class="form">
+  {% csrf_token %}
+  <div class="form-row">
+    <label for="id_name">Name</label>
+    <input id="id_name" type="text" name="name" value="{{ name|default_if_none:'' }}" required>
+  </div>
+  <div class="form-row">
+    <label for="id_email">Email</label>
+    <input id="id_email" type="email" name="email" value="{{ email|default_if_none:'' }}" required>
+  </div>
+  <div class="form-row">
+    <label for="id_message">Message</label>
+    <textarea id="id_message" name="message" rows="5" required>{{ message|default_if_none:'' }}</textarea>
+  </div>
+  <button type="submit" class="btn">Send</button>
+</form>
+{% endblock %}
